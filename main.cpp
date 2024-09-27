@@ -52,10 +52,20 @@ protected:
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
 
-    OverlayWindow window;
-    window.show();
+    QScreen *screen = QGuiApplication::primaryScreen();
+    if (!screen) {
+      return -1;
+    }
 
-    return app.exec();
+    QPixmap screenshot = screen->grabWindow(0);
+
+    screenshot.save("screenshot.png");
+
+    //OverlayWindow window;
+    //window.show();
+
+    //return app.exec();
+    return 0;
 }
 
 #include "main.moc"
